@@ -1,0 +1,67 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.total{
+    width: 1000px;
+    height: 450px;
+    border: 1px solid black;
+    margin: 0 auto; 
+   
+}
+.div1{
+    width: 1000px;
+    height: 150px;
+    position: relative;
+}
+#div1_1 img{
+    margin-top: 52px;
+}
+#div1_2{
+    width: 1000px;
+    height: 252px;
+    text-align: center;
+    float: left;
+}
+.div2{
+    height: 300px;
+    width: 14%;
+    border: 1px solid black;
+    float: left;
+    position: relative;
+}
+.btn1{
+    position: absolute;
+    left: 80px;
+    top: 60px;
+}
+.btn2{
+    position: absolute;
+    left: 80px;
+    top: 90px;
+}
+.btn3{
+    position: absolute;
+    left: 80px;
+    top: 120px;
+}
+.div3{
+    height: 300px;
+    width: 84%;
+    float: left;
+    text-align: center;
+    border: 1px solid black;
+}
+.password
+{
+    padding-top: 60px;
+}
+#profileImage{
+    width: 250px;
+    height: 250px;
+}
+#userInfo{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+}

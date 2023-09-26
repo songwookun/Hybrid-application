@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 홈페이지</title>
+    <link rel="stylesheet" href="day1.css">
+</head>
+<body>
+    <div class="total">
+        <div class="div1">
+            <div id="div1_2">
+                <label for="username">아이디:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password">
+                <button id="loginButton" type="button">로그인</button>
+                <button id="logoutButton" type="button" style="display: none;">로그아웃</button>
+            </div>
+            <div id="userInfo" style="display: none;">
+                <p id="nickname"></p>
+                <img id="profileImage" src="img/img0.png" alt="프로필 사진">
+            </div>
+            </div>
+        </div>
+        <div class="div2">
+            <button class="btn1" type="button"onclick="showDocumentText(0)">
+            버튼1
+            </button>
+            <button class="btn2" type="button"onclick="showDocumentText(1)">
+            버튼2
+        </button>
+            <button class="btn3" type="button"onclick="showDocumentText(2)">
+            버튼3
+        </button>
+        </div>
+        <div class="div3">
+            <div id="div3_1">
+            </div>
+        </div>
+    </div>
+    <script>
+ //버튼3을 누르면 영역3의 내용을 버튼3에 저장하고 버튼3을 눌렀을때 버튼3에 버튼1~2에 내용이 나오게, 버튼1,2눌렀을때 내용없음 팝업
+
+        const userData = {
+            username: 'thddnrms',
+            password: '202034020',
+            nickname: '송우근'
+        };
+    
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+        const userInfoContainer = document.getElementById('userInfo');
+        const nicknameParagraph = document.getElementById('nickname');
+    
+        loginButton.addEventListener('click', function () {
+    const enteredUsername = usernameInput.value;
+    const enteredPassword = passwordInput.value;
+
+    if (enteredUsername === userData.username && enteredPassword === userData.password) {
+        // 로그인 성공
+        showUserInfo();
+    } else {
+        // 로그인 실패
+        alert('아이디 또는 비밀번호가 잘못되었습니다.');
+    }
+    });
+
+    logoutButton.addEventListener('click', function () {
+        // 로그아웃
+        hideUserInfo();
+        showLoginFields(); // 아이디와 비밀번호 입력 상자를 다시 나타내는 함수 호출
+    });
+
+    function showUserInfo() {
+        usernameInput.style.display = 'none'; // 아이디 입력 상자 숨기기
+        passwordInput.style.display = 'none'; // 비밀번호 입력 상자 숨기기
+        loginButton.style.display = 'none';
+        logoutButton.style.display = 'inline-block';
+        userInfoContainer.style.display = 'block';
+        nicknameParagraph.textContent = '닉네임: ' + userData.nickname;
+
+        // 아이디와 비밀번호 레이블 숨기기
+        document.querySelector('label[for="username"]').style.display = 'none';
+        document.querySelector('label[for="password"]').style.display = 'none';
+    }
+
+
+    function hideUserInfo() {
+        loginButton.style.display = 'inline-block';
+        logoutButton.style.display = 'none';
+        userInfoContainer.style.display = 'none';
+        nicknameParagraph.textContent = '';
+    }
+
+    function showLoginFields() {
+        usernameInput.style.display = 'inline-block'; // 아이디 입력 상자 나타내기
+        passwordInput.style.display = 'inline-block'; // 비밀번호 입력 상자 나타내기
+        usernameInput.value = ''; // 아이디 입력 상자 초기화
+        passwordInput.value = ''; // 비밀번호 입력 상자 초기화
+        document.querySelector('label[for="username"]').style.display = 'inline-block'; // 아이디 레이블 나타내기
+        document.querySelector('label[for="password"]').style.display = 'inline-block'; // 비밀번호 레이블 나타내기
+    }       
+    const documentTextArea = document.getElementById('div3_1');
+
+        var confirmNum = 3;
+        var documentText = [];
+        documentText[0] = "학번:202034020 이름:송우근 키: 182 몸무게 70";
+        documentText[1] = "...모르겠다";
+        documentText[2] = "";
+        documentText[3] = "";
+        
+        function showDocumentText(num){
+            if(documentTextArea.innerHTML == "저장되었습니다." && confirmNum == num){
+                alert('내용이 없습니다..');
+            }
+            else if(documentText[num] == ''){
+                documentText[num] = documentText[confirmNum];
+                documentText[confirmNum] = '';
+                documentTextArea.innerHTML = "저장되었습니다.";
+            }
+            else{
+                documentTextArea.innerHTML = documentText[num];
+            }
+            confirmNum = num;
+        }
+    </script>
+</body>
+</html>
