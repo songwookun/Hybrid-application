@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn" onclick="getData()">버튼</button>
+    <p id="p">서버에서 불러 올거야</p>
+    <script>
+        function getData() {
+            // 서버의 'hi' API로 GET 요청을 보냅니다.
+            fetch("http://localhost:8040/hi") // 현재 호스트와 포트로 설정된 서버로 요청을 보냅니다.
+                .then(response => response.text())
+                .then(data => {
+                    // 받아온 데이터를 <p> 태그에 출력합니다.
+                    document.getElementById("p").textContent = data;
+                })
+                .catch(error => {
+                    console.error("데이터 가져오기 오류: " + error);
+                });
+        }
+    </script>
+</body>
+</html>
