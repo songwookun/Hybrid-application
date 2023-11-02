@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.game-container {
+  position: relative;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
+  text-align: center;
+}
+h1 {
+  color: blue;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.buttons {
+  margin-top: 1rem;
+}
+.buttons button {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.buttons button:hover {
+  background-color: lightblue;
+}
+canvas {
+  border: 1px solid #000;
+  display: block;
+  margin: 0 auto;
+}
+.obj{
+  position: absolute;
+  top: 350px;
+  left: 200px;
+  font-size: 30px;
+}
