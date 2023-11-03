@@ -7,54 +7,46 @@ let gameStarted = false; //게임 시작 여부를 나타냄
 let gameInterval; //게임 관리하는 변수
 let seconds = 0; //게임 시간 저장 
 let speedBoostActive = false; //뱀 속도 강화 상태 여부 표시
-let initialTailSize = 3; // 초기 꼬리 크기를 3 지정
+let initialTailSize = 2; // 초기 꼬리 크기를 2 지정
+let obstacles = []; // 장애물을 담을 배열 선언
 
 class Snake { //뱀 관련 클래스
 constructor() {
-    // Snake의 초기 위치, 크기, 색상, 꼬리, 이동 속도 및 초기 꼬리 크기를 설정합니다.
     this.x = 100;  // 뱀의 x 위치
     this.y = 100;  // 뱀의 y 위치
     this.size = 5;  // 뱀의 크기
     this.color = '#4CAF50';  // 뱀의 색상
     this.tail = [];  // 뱀의 꼬리
     this.speed = 5;  // 뱀의 이동 속도
-    this.initialTailSize = 2;  // 초기 꼬리 크기
-    // 초기 꼬리 생성 함수 호출
-    this.Tail();
+    this.Tail(); // 초기 꼬리 생성 함수 호출
 }
 
-draw() {
-    // 뱀 그리기 함수, 머리와 꼬리가 원으로 그려집니다.
+draw() {  // 뱀 그리기 함수, 머리와 꼬리가 원으로 그려집니다.
     ctx.beginPath();  // 새 경로 생성
     const offsetY = this.size / 3;  // y 좌표에 더해질 오프셋 값 설정
     ctx.arc(this.x, this.y - offsetY, this.size, 0, 2 * Math.PI);  // 뱀의 머리
     ctx.fillStyle = this.color;  // 뱀의 색상 설정
     ctx.fill();
-    // 현재 이 루프는 뱀의 꼬리를 그리기 위한 반복문입니다.
-    for (let i = 0; i < this.tail.length; i++) {
+    for (let i = 0; i < this.tail.length; i++) { // 현재 이 루프는 뱀의 꼬리를 그리기 위한 반복문입니다.
         ctx.beginPath();// 새로운 경로를 만듭니다.
-        ctx.arc(this.tail[i].x, this.tail[i].y, this.size, 0, 2 * Math.PI);      // 현재 꼬리 블록을 기준으로 원을 그립니다.
+        ctx.arc(this.tail[i].x, this.tail[i].y, this.size, 0, 2 * Math.PI); // 현재 꼬리 블록을 기준으로 원을 그립니다.
         ctx.fill(); // 이전에 정의한 경로를 채우기(fill)를 이용하여 색을 입힙니다.
     }
 }
 
-Tail() {
-    // 초기 꼬리 생성, 뱀의 꼬리는 배열로 표현됩니다.
+Tail() {// 초기 꼬리 생성, 뱀의 꼬리는 배열로 표현됩니다.
     for (let i = 0; i < this.initialTailSize; i++) {
         this.tail.push({ x: this.x - (i + 1) * this.size, y: this.y });  // 꼬리의 위치 설정
     }
 }
 
-update() {
-    // 뱀의 위치 업데이트 및 이동 관련 작업 수행
+update() {  // 뱀의 위치 업데이트 및 이동 관련 작업 수행
     for (let i = this.tail.length - 1; i > 0; i--) {
         this.tail[i] = { x: this.tail[i - 1].x, y: this.tail[i - 1].y };  // 꼬리의 이전 위치로 설정
     }
-
     if (this.tail.length > 0) {
         this.tail[0] = { x: this.x, y: this.y };  // 꼬리의 첫 번째 부분을 머리 위치로 설정
     }
-
     // 마우스 방향으로 뱀을 이동시킵니다.
     const dirX = mouseX - this.x; // 마우스 x 좌표와 뱀의 x 좌표 차이를 계산
     const dirY = mouseY - this.y; // 마우스 y 좌표와 뱀의 y 좌표 차이를 계산
@@ -65,21 +57,16 @@ update() {
         this.x += (dirX / scalar) * this.speed;   // x축 이동량 계산
         this.y += (dirY / scalar) * this.speed;  // y축 이동량 계산
     }
-
-    // 벽과의 충돌 체크, 게임 종료 함수 호출
-    if (this.x < 0 || this.y < 0 || this.x >= canvas.width || this.y >= canvas.height) {
+    if (this.x < 0 || this.y < 0 || this.x >= canvas.width || this.y >= canvas.height) {  // 벽과의 충돌 체크, 게임 종료 함수 호출
         gameOver();
-    }
-
-    // 먹이(과일)를 먹는 로직, 먹이와 뱀의 거리를 계산하고 꼬리 길이와 점수 업데이트
-    const distanceToMouse = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2);
+    } 
+    const distanceToMouse = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2);   // 먹이(과일)를 먹는 로직, 먹이와 뱀의 거리를 계산하고 꼬리 길이와 점수 업데이트
     if (distanceToMouse < this.size) {
         gameOver();
     }
 }
 
-eatFruit(fruit) {
-    // 먹이를 먹을 때의 로직, 먹이와 뱀의 거리를 계산하고 꼬리와 점수 관리
+eatFruit(fruit) { // 먹이를 먹을 때의 로직, 먹이와 뱀의 거리를 계산하고 꼬리와 점수 관리
     const distance = Math.sqrt((this.x - fruit.x) ** 2 + (this.y - fruit.y) ** 2);
     if (distance < this.size + fruit.size) {
         fruit.newLocation();  // 새로운 먹이 위치 설정
@@ -181,14 +168,6 @@ class Obstacle { //장애물 클래스
 }
 const snake = new Snake(); // 새로운 뱀 개체 생성
 const fruit = new Fruit(); // 새로운 과일 개체 생성
-let obstacles = []; // 장애물을 담을 배열 선언
-// 장애물을 3개 생성하여 obstacles 배열에 추가
-for (let i = 0; i < 3; i++) {
-  obstacles.push(new Obstacle());
-}
-// 'startBtn'과 'stopBtn' 버튼에 대한 클릭 이벤트 처리 함수 등록
-document.getElementById('startBtn').addEventListener('click', startGame);
-document.getElementById('stopBtn').addEventListener('click', stopGame);
 
 function startGame() {// 게임 시작 함수
   if (!gameStarted) { // 게임이 시작되지 않았다면 실행
@@ -199,17 +178,17 @@ function startGame() {// 게임 시작 함수
     snake.y = 100;  // 뱀의 y 위치 초기화
     snake.size = 5;  // 뱀의 크기 초기화
     snake.tail = [];  // 꼬리 배열 초기화
-    snake.initialTailSize = 3;  // 초기 꼬리 크기 초기화
+    snake.initialTailSize = 2;  // 초기 꼬리 크기 2개 초기화
     snake.Tail(); // 새로운 꼬리 생성
     resetObstacles(); // 장애물 초기화 함수 호출
   }
 }
 
 function resetObstacles() {// 기존 장애물을 초기화하고 세 개의 새로운 장애물을 생성하여 배열에 추가합니다.
-obstacles = [];
-for (let i = 0; i < 3; i++) {
-  obstacles.push(new Obstacle());
-}
+  obstacles = [];
+  for (let i = 0; i < 3; i++) {
+    obstacles.push(new Obstacle());
+  }
 }
 
 function stopGame() {// 게임 종료 함수
@@ -256,6 +235,7 @@ function updateTimeAndLength() {// 게임이 시작된 경우, 초당 시간과 
     }
   }, 1000);
 }
+
 document.addEventListener('mousedown', onMouseDown); // 마우스 클릭 시(onMouseDown) 이벤트를 감지하여 실행
 
 function onMouseDown(event) {
@@ -271,16 +251,20 @@ function onMouseDown(event) {
 }
 }
 }
+
 function gameOver() {
-alert('Game Over! Score: ' + document.getElementById('score').textContent);
-snake.x = 100; // 뱀 초기 x 좌표
-snake.y = 100; // 뱀 초기 y 좌표
-snake.size = 5; // 뱀 크기 초기화
-snake.tail = []; // 꼬리 배열 초기화
-document.getElementById('score').textContent = '0'; // 점수 초기화
-seconds = 0; // 시간 초기화
-snake.initialTailSize = 2; // 뱀의 초기 꼬리 크기 초기화
-document.getElementById('time').textContent = '0'; // 시간을 0으로 초기화
-document.getElementById('snakeLength').textContent = '3'; // 뱀의 길이를 0으로 초기화
-stopGame(); // 게임 정지
-}
+  alert('Game Over! Score: ' + document.getElementById('score').textContent);
+  snake.x = 100; // 뱀 초기 x 좌표
+  snake.y = 100; // 뱀 초기 y 좌표
+  snake.size = 5; // 뱀 크기 초기화
+  snake.tail = []; // 꼬리 배열 초기화
+  document.getElementById('score').textContent = '0'; // 점수 초기화
+  seconds = 0; // 시간 초기화
+  snake.initialTailSize = 2; // 뱀의 초기 꼬리 크기 초기화
+  document.getElementById('time').textContent = '0'; // 시간을 0으로 초기화
+  document.getElementById('snakeLength').textContent = '3'; // 뱀의 길이를 0으로 초기화
+  stopGame(); // 게임 정지
+  }
+// 'startBtn'과 'stopBtn' 버튼에 대한 클릭 이벤트 처리 함수 등록
+document.getElementById('startBtn').addEventListener('click', startGame);
+document.getElementById('stopBtn').addEventListener('click', stopGame);
