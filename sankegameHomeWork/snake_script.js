@@ -7,7 +7,7 @@ let gameStarted = false; //게임 시작 여부를 나타냄
 let gameInterval; //게임 관리하는 변수
 let seconds = 0; //게임 시간 저장 
 let speedBoostActive = false; //뱀 속도 강화 상태 여부 표시
-let initialTailSize = 2; // 초기 꼬리 크기를 2 지정
+let initialTailSize = 3; // 초기 꼬리 크기를 2 지정
 let obstacles = []; // 장애물을 담을 배열 선언
 
 class Snake { //뱀 관련 클래스
@@ -176,9 +176,7 @@ function startGame() {// 게임 시작 함수
     updateTimeAndLength(); // 시간과 뱀 길이 업데이트
     snake.x = 100;  // 뱀의 x 위치 초기화
     snake.y = 100;  // 뱀의 y 위치 초기화
-    snake.size = 5;  // 뱀의 크기 초기화
-    snake.tail = [];  // 꼬리 배열 초기화
-    snake.initialTailSize = 2;  // 초기 꼬리 크기 2개 초기화
+    snake.initialTailSize = 3;  // 초기 꼬리 크기 2개 초기화
     snake.Tail(); // 새로운 꼬리 생성
     resetObstacles(); // 장애물 초기화 함수 호출
   }
@@ -254,13 +252,10 @@ function onMouseDown(event) {
 
 function gameOver() {
   alert('Game Over! Score: ' + document.getElementById('score').textContent);
-  snake.x = 100; // 뱀 초기 x 좌표
-  snake.y = 100; // 뱀 초기 y 좌표
-  snake.size = 5; // 뱀 크기 초기화
   snake.tail = []; // 꼬리 배열 초기화
   document.getElementById('score').textContent = '0'; // 점수 초기화
   seconds = 0; // 시간 초기화
-  snake.initialTailSize = 2; // 뱀의 초기 꼬리 크기 초기화
+  snake.initialTailSize = 3; // 뱀의 초기 꼬리 크기 초기화
   document.getElementById('time').textContent = '0'; // 시간을 0으로 초기화
   document.getElementById('snakeLength').textContent = '3'; // 뱀의 길이를 0으로 초기화
   stopGame(); // 게임 정지
