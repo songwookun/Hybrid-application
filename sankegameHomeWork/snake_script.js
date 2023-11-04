@@ -40,27 +40,25 @@ Tail() {// 초기 꼬리 생성, 뱀의 꼬리는 배열로 표현됩니다.
     }
 }
 
-update() {  // 뱀의 위치 업데이트 및 이동 관련 작업 수행
-    for (let i = this.tail.length - 1; i > 0; i--) {
-        this.tail[i] = { x: this.tail[i - 1].x, y: this.tail[i - 1].y };  // 꼬리의 이전 위치로 설정
-    }
-    if (this.tail.length > 0) {
-        this.tail[0] = { x: this.x, y: this.y };  // 꼬리의 첫 번째 부분을 머리 위치로 설정
-    }
-    // 마우스 방향으로 뱀을 이동시킵니다.
+update() {  // 뱀의 위치 업데이트 및 이동 관련 작업 수행,  // 마우스 방향으로 뱀을 이동시킵니다.
     const dirX = mouseX - this.x; // 마우스 x 좌표와 뱀의 x 좌표 차이를 계산
     const dirY = mouseY - this.y; // 마우스 y 좌표와 뱀의 y 좌표 차이를 계산
-
     const scalar = Math.sqrt(dirX * dirX + dirY * dirY); // 마우스와 뱀 사이의 거리에 대한 스칼라를 계산합니다
     //이동 거리는 뱀의 속도에 따라 조절됩니다.
     if (scalar > 20) { // 좌표 값이 20보다 클 때, 일정 거리 이상일 때만 움직입니다.
         this.x += (dirX / scalar) * this.speed;   // x축 이동량 계산
         this.y += (dirY / scalar) * this.speed;  // y축 이동량 계산
     }
+    for (let i = this.tail.length - 1; i > 0; i--) {
+        this.tail[i] = { x: this.tail[i - 1].x, y: this.tail[i - 1].y };  // 꼬리의 이전 위치로 설정
+    }
+    if (this.tail.length > 0) {
+        this.tail[0] = { x: this.x, y: this.y };  // 꼬리의 첫 번째 부분을 머리 위치로 설정
+    }
     if (this.x < 0 || this.y < 0 || this.x >= canvas.width || this.y >= canvas.height) {  // 벽과의 충돌 체크, 게임 종료 함수 호출
         gameOver();
     } 
-    const distanceToMouse = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2);   // 먹이(과일)를 먹는 로직, 먹이와 뱀의 거리를 계산하고 꼬리 길이와 점수 업데이트
+    const distanceToMouse = Math.sqrt((this.x - mouseX) ** 2 + (this.y - mouseY) ** 2); //뱀의 머리와 마우스 간의 거리(distanceToMouse)가 this.size보다 작다면, 이는 뱀의 머리가 마우스 근처에 있음을 나타냅니다.
     if (distanceToMouse < this.size) {
         gameOver();
     }
@@ -76,7 +74,7 @@ eatFruit(fruit) { // 먹이를 먹을 때의 로직, 먹이와 뱀의 거리를 
         const score = parseInt(scoreSpan.textContent) + 1;
         scoreSpan.textContent = score;  // 점수 업데이트
         updateObstacleCount(score);
-        document.getElementById('snakeLength').textContent = this.in;  // 뱀 길이 업데이트
+        document.getElementById('snakeLength').textContent = this.initialTailSize;  // 뱀 길이 업데이트
     }
 }
 }
