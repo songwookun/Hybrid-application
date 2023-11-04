@@ -1,5 +1,5 @@
-const canvas = document.getElementById('game-board'); // 'game-board'라는 ID를 가진 캔버스 엘리먼트를 가져옴
-const ctx = canvas.getContext('2d'); // 2D 렌더링 컨텍스트를 가져와서 ctx 변수에 저장  ctx를 통해 2D 그래픽 작업을 수행
+const canvas = document.getElementById('game-board'); 
+const ctx = canvas.getContext('2d'); 
 
 let mouseX = 0; //마우스 x좌표 초기화
 let mouseY = 0; //마우스 y좌표 초기화
