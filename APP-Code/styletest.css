@@ -19,13 +19,25 @@ p{
 }
 @media screen and (max-width: 540px) {
     .section0{
+        .back1{
+            width: 100px;
+            height: 25px;;
+            text-align: center;
+            font-size: 13px;
+            border: 0;
+            border-radius: 15px;
+            background-color: #C6DBDA;
+        }
+        .back:hover{
+            background-color: gray;
+        }
         .joinForm {
             align-items: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 50%;
-        
+            height: 98vh;      
+
             #newUsername, #newPassword{
                 height: 30px;
                 width: 250px;
@@ -49,6 +61,7 @@ p{
             #joinButton:hover{
                 background-color: gray;
             }
+            
         }
     }
     .section1{
@@ -57,7 +70,7 @@ p{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 30%;
+            height: 98vh;      
 
             #username, #password{
                 height: 30px;
@@ -116,6 +129,7 @@ p{
             display: flex;
             justify-content: space-around;
             align-items: center;
+
             .back{
                 width: 100px;
                 height: 25px;;
@@ -145,7 +159,7 @@ p{
         .option{
             display: flex;
             content: "";
-            height: 95px;
+            height: 12vh;
 
             .red-button, .blue-button, .black-button{
                 position: fixed;
@@ -201,14 +215,16 @@ p{
             .pink-note:hover, .gray-note:hover, .normal-note:hover{
                 background-color: white;
             }
+            .emoticon-selection{
+                margin-top: 9vh;
+            }
         }
-        .emoticon-selection{
-            margin-top: 67px;
-        }
+        
         .note{
             display: flex;
         }
         .textnote {
+            height: 75vh;
             width: 100%; 
         }
     }
@@ -277,14 +293,26 @@ p{
         }
     }
 }
-@media screen and (min-width:541px) and (max-width: 1023px) {
+@media screen and (min-width: 541px) and (max-width: 1023px) {
     .section0{
+        .back1{
+            width: 125px;
+            height: 30px;;
+            text-align: center;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            background-color: #C6DBDA;
+        }
+        .back:hover{
+            background-color: gray;
+        }
         .joinForm {
             align-items: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 30%;
+            height: 98vh;
         
             #newUsername, #newPassword{
                 height: 30px;
@@ -309,6 +337,7 @@ p{
             #joinButton:hover{
                 background-color: gray;
             }
+            
         }
     }
     .section1{
@@ -317,7 +346,7 @@ p{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 30%;
+            height: 98vh;
 
             #username, #password{
                 height: 30px;
@@ -376,9 +405,10 @@ p{
             display: flex;
             justify-content: space-around;
             align-items: center;
+
             .back{
                 width: 150px;
-                height: 35px;;
+                height: 30px;;
                 text-align: center;
                 font-size: 23px;
                 border: 0;
@@ -386,14 +416,14 @@ p{
                 background-color: #C6DBDA;
             }
             .datepicker{
-                width: 250px;
-                height: 35px;
+                width: 200px;
+                height: 30px;
                 text-align: center;
-                font-size: 30px;
+                font-size: 20px;
             }
             .save{
                 width: 150px;   
-                height: 35px;;
+                height: 30px;;
                 font-size: 23px;
                 border: 0;
                 border-radius: 20px;
@@ -405,12 +435,12 @@ p{
         .option{
             display: flex;
             content: "";
-            height: 105px;
+            height: 15vh;
 
             .red-button, .blue-button, .black-button{
                 position: fixed;
                 top: 8%;
-                width: 150px;
+                width: 125px;
                 height: 30px;;
                 font-size: 25px;
                 color : white;
@@ -433,7 +463,7 @@ p{
             .pink-note, .gray-note, .normal-note, .emoticon-button{
                 position: fixed;
                 top: 13%;
-                width: 150px;
+                width: 125px;
                 height: 30px;;
                 font-size: 20px;
                 border: 0;
@@ -461,14 +491,15 @@ p{
             .pink-note:hover, .gray-note:hover, .normal-note:hover{
                 background-color: white;
             }
-        }
-        .emoticon-selection{
-            margin-top: 80px;
+            .emoticon-selection{
+                margin-top: 12vh;
+            }
         }
         .note{
             display: flex;
         }
         .textnote {
+            height: 75vh;
             width: 100%; 
         }
     }
@@ -546,13 +577,25 @@ p{
 }
 @media screen and (min-width: 1024px) {
     .section0{
+        .back1{
+            width: 100px;
+            height: 25px;;
+            text-align: center;
+            font-size: 13px;
+            border: 0;
+            border-radius: 15px;
+            background-color: #C6DBDA;
+        }
+        .back:hover{
+            background-color: gray;
+        }
         .joinForm {
             align-items: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 5%;
-        
+            height: 98vh;
+
             #newUsername, #newPassword{
                 height: 30px;
                 width: 300px;
@@ -584,7 +627,7 @@ p{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-top: 5%;
+            height: 98vh;
 
             #username, #password{
                 height: 30px;
@@ -675,7 +718,7 @@ p{
         .option{
             display: flex;
             content: "";
-            height: 105px;
+            height: 14vh;
 
             .red-button, .blue-button, .black-button{
                 position: fixed;
@@ -731,14 +774,15 @@ p{
             .pink-note:hover, .gray-note:hover, .normal-note:hover{
                 background-color: white;
             }
-        }
-        .emoticon-selection{
-            margin-top: 80px;
+            .emoticon-selection{
+                margin-top: 12vh;
+            }
         }
         .note{
             display: flex;
         }
         .textnote {
+            height: 75vh;
             width: 100%; 
         }
     }
